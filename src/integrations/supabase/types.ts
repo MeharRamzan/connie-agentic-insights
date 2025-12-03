@@ -14,7 +14,306 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contacts: {
+        Row: {
+          avatar_url: string | null
+          company: string | null
+          connection_strength: number | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          job_title: string | null
+          last_contacted_at: string | null
+          linkedin_url: string | null
+          location: string | null
+          notes: string | null
+          phone: string | null
+          source: string | null
+          tags: string[] | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          company?: string | null
+          connection_strength?: number | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          job_title?: string | null
+          last_contacted_at?: string | null
+          linkedin_url?: string | null
+          location?: string | null
+          notes?: string | null
+          phone?: string | null
+          source?: string | null
+          tags?: string[] | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          company?: string | null
+          connection_strength?: number | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          job_title?: string | null
+          last_contacted_at?: string | null
+          linkedin_url?: string | null
+          location?: string | null
+          notes?: string | null
+          phone?: string | null
+          source?: string | null
+          tags?: string[] | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      interactions: {
+        Row: {
+          contact_id: string
+          created_at: string
+          id: string
+          interaction_date: string
+          sentiment: string | null
+          subject: string | null
+          summary: string | null
+          type: string
+          user_id: string
+        }
+        Insert: {
+          contact_id: string
+          created_at?: string
+          id?: string
+          interaction_date?: string
+          sentiment?: string | null
+          subject?: string | null
+          summary?: string | null
+          type: string
+          user_id: string
+        }
+        Update: {
+          contact_id?: string
+          created_at?: string
+          id?: string
+          interaction_date?: string
+          sentiment?: string | null
+          subject?: string | null
+          summary?: string | null
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "interactions_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      meetings: {
+        Row: {
+          attendee_ids: string[] | null
+          created_at: string
+          description: string | null
+          follow_up_notes: string | null
+          id: string
+          location: string | null
+          meeting_date: string
+          prep_notes: string | null
+          status: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attendee_ids?: string[] | null
+          created_at?: string
+          description?: string | null
+          follow_up_notes?: string | null
+          id?: string
+          location?: string | null
+          meeting_date: string
+          prep_notes?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attendee_ids?: string[] | null
+          created_at?: string
+          description?: string | null
+          follow_up_notes?: string | null
+          id?: string
+          location?: string | null
+          meeting_date?: string
+          prep_notes?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notes: {
+        Row: {
+          contact_id: string | null
+          content: string | null
+          created_at: string
+          id: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          contact_id?: string | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          contact_id?: string | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notes_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          company: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          job_title: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          company?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          job_title?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          company?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          job_title?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      reconnection_suggestions: {
+        Row: {
+          acted_on_at: string | null
+          contact_id: string
+          created_at: string
+          dismissed_at: string | null
+          id: string
+          priority: number | null
+          reason: string | null
+          suggested_at: string
+          user_id: string
+        }
+        Insert: {
+          acted_on_at?: string | null
+          contact_id: string
+          created_at?: string
+          dismissed_at?: string | null
+          id?: string
+          priority?: number | null
+          reason?: string | null
+          suggested_at?: string
+          user_id: string
+        }
+        Update: {
+          acted_on_at?: string | null
+          contact_id?: string
+          created_at?: string
+          dismissed_at?: string | null
+          id?: string
+          priority?: number | null
+          reason?: string | null
+          suggested_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reconnection_suggestions_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_integrations: {
+        Row: {
+          created_at: string
+          id: string
+          last_synced_at: string | null
+          metadata: Json | null
+          provider: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_synced_at?: string | null
+          metadata?: Json | null
+          provider: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_synced_at?: string | null
+          metadata?: Json | null
+          provider?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
